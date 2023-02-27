@@ -2,6 +2,8 @@ package com.platinum.studentProjectPortal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -16,10 +18,16 @@ public class StudentController {
     Student getStudent(@RequestParam("id") int admnNo){   //method name can be change or same used b`coz call as per name
         return service.get_info(admnNo);
     }
+//    @PostMapping("/add")
+//    String addStudent(@RequestBody() Student student){
+//        service.addStudent(student);
+//        return "Added";
+//    }
+    //ResponseEntity is spring class for use Postman status change
     @PostMapping("/add")
-    String addStudent(@RequestBody() Student student){
+    ResponseEntity addStudent(@RequestBody() Student student){
         service.addStudent(student);
-        return "Added";
+        return new ResponseEntity<>("Added", HttpStatus.CREATED);
     }
 }
 
